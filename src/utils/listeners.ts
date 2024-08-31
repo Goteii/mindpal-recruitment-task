@@ -6,7 +6,7 @@ import {
 } from "./creators";
 import { getBtnId, getNoteById, getNotes } from "./getters";
 
-export const addNewNoteListener = () => {
+export const noNotesAddNoteListener = () => {
   const addNote = document.getElementById("add-note")!;
   addNote.addEventListener("click", () => {
     const addNoteSection = createAddNewNoteView();
@@ -33,7 +33,7 @@ const addNewNoteCancelListener = () => {
     const noNotesView = createNoNotesView();
     const container = document.getElementById("container");
     container?.replaceChildren(noNotesView);
-    addNewNoteListener();
+    noNotesAddNoteListener();
   });
 };
 
@@ -133,8 +133,19 @@ const modalRemoveNoteListener = (id: string) => {
   ) as HTMLButtonElement;
 
   removeBtn.addEventListener("click", () => {
-    getNoteById(id).remove();
+    getNoteById(id)?.remove();
     modal.close();
+
+    const notes = getNotes().length;
+    console.log("notes", notes);
+
+    if (!notes) {
+      const container = document.getElementById("container")!;
+      const noNotesView = createNoNotesView();
+      container.replaceChildren(noNotesView);
+
+      noNotesAddNoteListener();
+    }
   });
 };
 
