@@ -43,38 +43,43 @@
 
 //no notes view
 
-.no-notes-container {
-  padding: 0 token.getSpacing("16px");
+.container {
   margin-top: token.getSpacing("24px");
   display: flex;
   flex-direction: column;
   align-items: center;
-  //@TODO to remove later on
-  display: none;
+  height: calc(100dvh - 130px);
+  gap: token.getSpacing("16px");
 }
-.details {
-  margin-top: token.getSpacing("38px");
-  gap: token.getSpacing("12px");
+.details-wrapper {
+  padding: 0 token.getSpacing("16px");
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.details {
+  margin-top: token.getSpacing("38px");
   padding: 0 token.getSpacing("20px");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: token.getSpacing("12px");
   text-align: center;
 }
 .information {
   height: token.getElementSize("lg");
 }
-.no-notes-container > .details > .heading {
+.details-wrapper > .details > .heading {
   font-weight: token.getFontWeight("medium");
   font-size: token.getFontSize("lg");
   line-height: token.getLineHeight("lg");
 }
-.no-notes-container > .details > .description {
+.details-wrapper > .details > .description {
   font-weight: token.getFontWeight("regular");
   font-size: token.getFontSize("md");
   line-height: token.getLineHeight("md-lg");
 }
-.no-notes-container > .add-note {
+.details-wrapper > .add-note {
   margin-top: token.getSpacing("24px");
   gap: token.getSpacing("8px");
   font-weight: token.getFontWeight("medium");
@@ -82,14 +87,6 @@
 
 //notes view
 
-.notes-container {
-  overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
-  height: calc(100dvh - 130px);
-  gap: token.getSpacing("16px");
-  padding-top: token.getSpacing("16px");
-}
 .add-note-primary {
   width: 100%;
   margin: 0 token.getSpacing("16px");
@@ -188,6 +185,7 @@ dialog::backdrop {
 //add new note
 .add-new-note-container {
   padding: token.getSpacing("20px") token.getSpacing("16px");
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: token.getSpacing("16px");
