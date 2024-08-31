@@ -139,3 +139,48 @@
   line-height: token.getLineHeight("vsm");
   color: token.getColor("text", "placeholder");
 }
+
+//modal
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 32px);
+  border: 0;
+  background: token.getColor("bg", "bright");
+  padding: token.getSpacing("24px");
+  border-radius: token.getRadius("16px");
+  gap: token.getSpacing("24px");
+}
+
+.modal > .container {
+  display: flex;
+  flex-direction: column;
+  gap: token.getSpacing("24px");
+}
+
+.modal-heading {
+  font-weight: token.getFontWeight("medium");
+  font-size: token.getFontSize("lg");
+  line-height: token.getLineHeight("lg");
+}
+
+.modal-body {
+  font-weight: token.getFontWeight("regular");
+  line-height: token.getLineHeight("md-lg");
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: token.getSpacing("16px");
+}
+
+.modal-action-btn {
+  width: 50%;
+}
+
+dialog::backdrop {
+  background-color: token.getColor("bg", "dark");
+}

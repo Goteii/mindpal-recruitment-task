@@ -21,6 +21,24 @@
         <h1>Notes</h1>
       </button>
     </header>
+    <dialog class="modal" id="modal">
+      <div class="container">
+        <h2 class="modal-heading">Delete Note</h2>
+        <p class="modal-body">Are you sure you want to delete this note?</p>
+        <div class="modal-footer">
+          <button
+            autofocus
+            class="btn btn-secondary modal-action-btn"
+            id="modal-cancel"
+          >
+            Cancel
+          </button>
+          <button class="btn btn-primary modal-action-btn" id="modal-remove">
+            Delete
+          </button>
+        </div>
+      </div>
+    </dialog>
     <!-- search bar-->
     <section class="search">
       <input class="text-field search-input" placeholder="Search notes..." />
@@ -83,7 +101,7 @@
         </div>
       </section>
 
-      <section class="note-tile">
+      <!-- <section class="note-tile">
         <div class="note-header">
           <h2 class="note-title">Note Title</h2>
           <div class="actions">
@@ -221,7 +239,7 @@
         <div class="note-footer">
           <p>May 22</p>
         </div>
-      </section>
+      </section> -->
     </section>
 
     <!-- dynamic content -->
