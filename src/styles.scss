@@ -83,16 +83,16 @@
 //notes view
 
 .notes-container {
-  padding: 0 token.getSpacing("16px");
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
   height: calc(100dvh - 130px);
   gap: token.getSpacing("16px");
+  padding-top: token.getSpacing("16px");
 }
 .add-note-primary {
   width: 100%;
-  margin-top: token.getSpacing("16px");
+  margin: 0 token.getSpacing("16px");
 }
 
 //note tile
@@ -100,7 +100,7 @@
   background: token.getColor("bg", "bright");
   border-radius: token.getRadius("12px");
   box-shadow: token.getShadow("default");
-
+  margin: 0 token.getSpacing("16px");
   gap: token.getSpacing("12px");
   display: flex;
   flex-direction: column;
@@ -183,4 +183,45 @@
 
 dialog::backdrop {
   background-color: token.getColor("bg", "dark");
+}
+
+//add new note
+.add-new-note-container {
+  padding: token.getSpacing("20px") token.getSpacing("16px");
+  display: flex;
+  flex-direction: column;
+  gap: token.getSpacing("16px");
+  box-shadow: token.getShadow("default2");
+  border-width: 1px 0px 1px 0px;
+  border-style: solid;
+  border-color: token.getColor("bg", "bright_darken200");
+}
+
+.add-new-note-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.add-new-note-heading > h2 {
+  font-weight: token.getFontWeight("medium");
+  font-size: token.getFontSize("md");
+  line-height: token.getLineHeight("md-lg");
+}
+
+.add-new-note-body {
+  display: flex;
+  flex-direction: column;
+  gap: token.getSpacing("16px");
+  position: relative;
+}
+
+.add-new-note.btn.btn-primary {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
+.note-body-textarea {
+  resize: vertical;
+  min-height: 210px;
 }
