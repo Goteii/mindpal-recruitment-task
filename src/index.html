@@ -1,9 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Mindpal - Recruitment task</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mindpal - Recruitment task</title>
+    <meta name="description" content="recruitment task" />
+    <meta name="application-name" content="notes - recruitment task" />
+    <meta name="color-scheme" content="light" />
+    <meta name="author" content="Dawid Dowgiałło" />
   </head>
-  <body></body>
+  <body>
+    <!-- header-->
+    <header>
+      <button class="btn-scroll">
+        <img
+          src="<%= require('./assets/note.svg') %>"
+          loading="eager"
+          alt="Note"
+        />
+        <h1>Notes</h1>
+      </button>
+    </header>
+    <!-- search bar-->
+    <section class="search">
+      <input class="text-field search-input" placeholder="Search notes..." />
+    </section>
+    <section class="no-notes" id="no-notes">
+      <div class="details">
+        <img
+          src="<%= require('./assets/information.svg') %>"
+          loading="eager"
+          alt="Information circle"
+          class="information"
+        />
+        <h2 class="heading">No notes yet</h2>
+        <p class="description">Add a note to keep track of your learnings.</p>
+      </div>
+      <button class="btn btn-secondary add-note">
+        <img src="<%= require('./assets/note_add.svg') %>" alt="" />
+        <span>Add Note</span>
+      </button>
+      <!-- action btn-->
+    </section>
+
+    <!-- dynamic content -->
+  </body>
 </html>

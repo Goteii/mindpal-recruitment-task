@@ -1,5 +1,6 @@
 @use "./styles/typography" as *;
 @use "./styles/tokens" as token;
+@use "./styles/design" as *;
 
 *,
 *::after,
@@ -9,74 +10,65 @@
   margin: 0;
 }
 
-.btn {
-  border-radius: token.getRadius("12px");
-  padding: token.getSpacing("8px") token.getSpacing("16px");
-  text-align: center;
+body {
+  padding: token.getSpacing("16px");
+}
+
+.btn-scroll {
+  display: flex;
+  align-items: center;
+  border: 0;
+  background: transparent;
   cursor: pointer;
-  font-size: token.getSize("md");
+  gap: token.getSpacing("8px");
+}
+
+.btn-scroll > h1 {
   font-weight: token.getFontWeight("medium");
-  line-height: token.getLineHeight("md");
+  font-size: token.getFontSize("lg");
+  line-height: token.getLineHeight("lg");
 }
 
-.btn.btn-primary {
-  border: 0;
-  color: token.getColor("text", "bright");
-  background: token.getColor("primary", "default");
+.search-input {
+  width: 100%;
+  margin-top: token.getSpacing("24px");
+  background-image: url("./assets/search.svg");
+  background-repeat: no-repeat;
+  background-position: token.getSpacing("12px") 50%;
+  padding: token.getSpacing("8px") token.getSpacing("12px")
+    token.getSpacing("8px") token.getSpacing("48px");
 }
 
-.btn.btn-primary:hover {
-  background: token.getColor("primary", "hover");
+.no-notes {
+  margin-top: token.getSpacing("24px");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-.btn.btn-primary:active {
-  background: token.getColor("primary", "active");
+.details {
+  margin-top: token.getSpacing("38px");
+  gap: token.getSpacing("12px");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 token.getSpacing("20px");
+  text-align: center;
 }
-
-.btn.btn-secondary {
-  color: token.getColor("text", "dark");
-  background: token.getColor("bg", "bright");
-  border: 1px solid token.getColor("border", "default");
+.information {
+  height: token.getElementSize("lg");
 }
-.btn.btn-secondary:hover {
-  background: token.getColor("bg", "bright_darken100");
+.no-notes > .details > .heading {
+  font-weight: token.getFontWeight("medium");
+  font-size: token.getFontSize("lg");
+  line-height: token.getLineHeight("lg");
 }
-.btn.btn-secondary:active {
-  background: token.getColor("bg", "bright_darken400");
-}
-
-.text-field {
-  border-radius: token.getRadius("12px");
-  padding: token.getSpacing("8px") token.getSpacing("16px");
-  background: token.getColor("bg", "bright_darken200");
-  border: 0;
-  font-size: token.getSize("md");
-  line-height: token.getLineHeight("md");
-}
-.text-field:hover {
-  background: token.getColor("bg", "bright_darken300");
-}
-.text-field:focus {
-  background: token.getColor("bg", "bright");
-}
-
-.text-field::placeholder {
-  color: token.getColor("text", "placeholder");
+.no-notes > .details > .description {
+  font-weight: token.getFontWeight("regular");
+  font-size: token.getFontSize("md");
   line-height: token.getLineHeight("md-lg");
 }
-
-.btn.btn-cancel {
-  color: token.getColor("text", "neutral");
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  font-size: token.getSize("sm");
-  line-height: token.getLineHeight("sm");
-  font-weight: token.getFontWeight("regular");
-  padding: token.getSpacing("8px") token.getSpacing("12px");
-}
-.btn.btn-cancel:hover {
+.no-notes > .add-note {
+  margin-top: token.getSpacing("24px");
+  gap: token.getSpacing("8px");
   font-weight: token.getFontWeight("medium");
-  text-decoration: underline;
-  text-underline-offset: token.getSpacing("6px");
 }

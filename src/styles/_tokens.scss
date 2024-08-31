@@ -55,7 +55,10 @@ $spacing: (
   "28px": 1.75rem,
   "32px": 2rem,
   "36px": 2.25rem,
+  "38px": 2.3125rem,
   "40px": 2.5rem,
+  "44px": 2.75rem,
+  "48px": 3rem,
 );
 
 $radius: (
@@ -71,11 +74,15 @@ $radius: (
   "40px": 2.5rem,
 );
 
-$size: (
+$fontSize: (
   "vsm": 0.75rem,
   "sm": 0.875rem,
   "md": 1rem,
   "lg": 1.25rem,
+);
+
+$elementSize: (
+  "lg": 4rem,
 );
 
 $lineHeight: (
@@ -112,9 +119,14 @@ $lineHeight: (
     @return map-get($spacing, $key);
   }
 }
-@function getSize($key) {
-  @if map-has-key($size, $key) {
-    @return map-get($size, $key);
+@function getFontSize($key) {
+  @if map-has-key($fontSize, $key) {
+    @return map-get($fontSize, $key);
+  }
+}
+@function getElementSize($key) {
+  @if map-has-key($elementSize, $key) {
+    @return map-get($elementSize, $key);
   }
 }
 @function getLineHeight($key) {
