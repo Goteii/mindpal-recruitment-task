@@ -1,17 +1,26 @@
-//breakpoints
 $breakpoint-phone: 552px;
 $breakpoint-tablet: 768px;
 $breakpoint-laptop: 992px;
 $breakpoint-pc: 1200px;
 $breakpoint-desktop: 1540px;
 
-//fonts
 $font: (
   "primary": "Inter",
 );
 
 $color: (
   "shadow": #0000004d,
+  "border": (
+    "default": #bcbcbd,
+    "dark": #1b1c1e,
+  ),
+  "bg": (
+    "bright": #fff,
+    "bright_darken100": #e7e7e7,
+    "bright_darken200": #eeeff0,
+    "bright_darken300": #dcdee0,
+    "bright_darken400": #bdbdbd,
+  ),
   "primary": (
     "default": #6b3c9b,
     "hover": #844dba,
@@ -21,8 +30,8 @@ $color: (
     "dark": #1b1c1e,
     "bright": #fff,
     "placeholder": #5b5c5e,
+    "neutral": #0f75b8,
   ),
-  "link": #0f75b8,
   "input": (
     "default": #eeeff0,
     "hover": #dcdee0,
@@ -35,9 +44,9 @@ $weight: (
   "medium": 500,
 );
 
-//spacing
 $spacing: (
   "4px": 0.25rem,
+  "6px": 0.375rem,
   "8px": 0.5rem,
   "12px": 0.75rem,
   "16px": 1rem,
@@ -88,7 +97,7 @@ $lineHeight: (
     @return map-get(map-get($color, $key), $type);
   }
 }
-@function getWeight($key) {
+@function getFontWeight($key) {
   @if map-has-key($weight, $key) {
     @return map-get($weight, $key);
   }
