@@ -88,7 +88,7 @@
 //notes view
 
 .add-note-primary {
-  width: 100%;
+  width: calc(100% - 2rem);
   margin: 0 token.getSpacing("16px");
 }
 
@@ -97,7 +97,7 @@
   background: token.getColor("bg", "bright");
   border-radius: token.getRadius("12px");
   box-shadow: token.getShadow("default");
-  margin: 0 token.getSpacing("16px");
+  width: calc(100% - 2rem);
   gap: token.getSpacing("12px");
   display: flex;
   flex-direction: column;
@@ -151,7 +151,7 @@
   gap: token.getSpacing("24px");
 }
 
-.modal > .container {
+.modal > .modal-container {
   display: flex;
   flex-direction: column;
   gap: token.getSpacing("24px");

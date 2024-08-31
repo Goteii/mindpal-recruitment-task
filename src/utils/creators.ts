@@ -4,12 +4,12 @@ import { CustomImage } from "../models/image.model";
 import { Input } from "../models/input.model";
 import { CustomText } from "../models/text.model";
 import { Textarea } from "../models/textarea.model";
+import { getNotes } from "./getters";
 
 export const createAddNewNoteView = (): HTMLElement => {
   const section = createSection("add-new-note-container");
-  const heading = createDiv("add-new-note-heading");
-  const body = createDiv("add-new-note-body");
 
+  const heading = createDiv("add-new-note-heading");
   const headingHeader = createHeading({ textContent: "Add new note" });
   const headingButton = createButton({
     className: "btn btn-cancel",
@@ -20,6 +20,7 @@ export const createAddNewNoteView = (): HTMLElement => {
   heading.appendChild(headingHeader);
   heading.appendChild(headingButton);
 
+  const body = createDiv("add-new-note-body");
   const bodyInput = createInput({
     className: "text-field",
     id: "note-title",
@@ -33,7 +34,7 @@ export const createAddNewNoteView = (): HTMLElement => {
   const bodyButton = createButton({
     className: "btn btn-primary add-new-note",
     textContent: "Add",
-    id: "Add_Note",
+    id: "add-new-note",
   });
 
   body.appendChild(bodyInput);
@@ -47,20 +48,18 @@ export const createAddNewNoteView = (): HTMLElement => {
 
 export const createNoNotesView = (): HTMLElement => {
   const wrapper = createDiv("details-wrapper");
-  const details = createDiv("details");
 
+  const details = createDiv("details");
   const informationImg = createImage({
     src: require("../assets/information.svg"),
     loading: "eager",
     alt: "Information circle",
     className: "information",
   });
-
   const heading = createHeading({
     textContent: "No notes yet",
     className: "heading",
   });
-
   const detailsParagraph = createText({
     type: "p",
     textContent: "Add a note to keep track of your learnings.",
@@ -91,6 +90,79 @@ export const createNoNotesView = (): HTMLElement => {
   wrapper.appendChild(button);
 
   return wrapper;
+};
+
+export const createNote = (): HTMLElement => {
+  const titleVal = (document.getElementById("note-title") as HTMLInputElement)
+    .value;
+  const bodyVal = (document.getElementById("note-body") as HTMLTextAreaElement)
+    .value;
+  const notesLen = getNotes().length;
+  const section = createSection("note-tile");
+  section.setAttribute("data-id", notesLen.toString());
+
+  const noteHeader = createDiv("note-header");
+  const noteTitle = createHeading({
+    className: "note-title",
+    textContent: titleVal,
+  });
+
+  const actions = createDiv("actions");
+  const editNoteBtn = createButton({
+    className: "action-btn edit-action",
+    id: "edit-note-" + notesLen,
+    "data-id": notesLen.toString(),
+  });
+  const editNoteImg = createImage({
+    alt: "Edit note",
+    loading: "lazy",
+    src: require("../assets/edit.svg"),
+  });
+
+  editNoteBtn.appendChild(editNoteImg);
+
+  const removeNoteBtn = createButton({
+    className: "action-btn remove-action",
+    id: "remove-note-" + notesLen,
+    "data-id": notesLen.toString(),
+  });
+  const removeNoteImg = createImage({
+    alt: "Remove note",
+    loading: "lazy",
+    src: require("../assets/remove.svg"),
+  });
+
+  removeNoteBtn.appendChild(removeNoteImg);
+
+  actions.appendChild(editNoteBtn);
+  actions.appendChild(removeNoteBtn);
+
+  noteHeader.appendChild(noteTitle);
+  noteHeader.appendChild(actions);
+
+  const noteBody = createDiv("note-body");
+  const noteBodyText = createText({ type: "p", textContent: bodyVal });
+
+  noteBody.appendChild(noteBodyText);
+
+  const noteFooter = createDiv("note-footer");
+  const noteFooterText = createText({ type: "p", textContent: "May 22" });
+
+  noteFooter.appendChild(noteFooterText);
+
+  section.appendChild(noteHeader);
+  section.appendChild(noteBody);
+  section.appendChild(noteFooter);
+
+  return section;
+};
+
+export const createAddNewNoteBtn = (): HTMLButtonElement => {
+  return createButton({
+    className: "btn btn-primary add-note-primary",
+    id: "add-new-note-primary",
+    textContent: "Add New",
+  });
 };
 
 //private creators
@@ -126,6 +198,9 @@ const createButton = (payload: Button): HTMLButtonElement => {
   button.className = payload.className;
   button.textContent = payload.textContent || "";
   button.id = payload.id;
+  if (payload["data-id"]) {
+    button.setAttribute("data-id", payload["data-id"]);
+  }
   return button;
 };
 

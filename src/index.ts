@@ -1,11 +1,7 @@
 import "./styles.scss";
-import { createAddNewNoteView } from "./utils/creators";
-import { addNewNoteCancelListener } from "./utils/listeners";
+import { addNewNoteListener } from "./utils/listeners";
 
-const REMOVE_NOTE = document.getElementById("remove-note")!;
-const MODAL = document.getElementById("modal") as HTMLDialogElement;
-const MODAL_CANCEL = document.getElementById("modal-cancel")!;
-const CONTAINER = document.getElementById("container");
+const CONTAINER = document.getElementById("container")!;
 
 //works
 // REMOVE_NOTE.addEventListener("click", () => {
@@ -16,14 +12,25 @@ const CONTAINER = document.getElementById("container");
 //   MODAL.close();
 // });
 
-const ADD_NOTE = document.getElementById("add-note")!;
-
-ADD_NOTE.addEventListener("click", () => {
-  console.log("creating a note");
-  const addNoteSection = createAddNewNoteView();
-  CONTAINER?.replaceChildren(addNoteSection);
-
-  addNewNoteCancelListener();
-});
+addNewNoteListener();
 
 //@TODO add focus trap if modal is active
+
+const config = { childList: true };
+
+const cb = (mutationList: MutationRecord[]) => {
+  for (const mutation of mutationList) {
+    if (mutation.type === "childList") {
+      console.log("A child node has been added or removed.");
+      console.log(mutation.target.childNodes.length);
+    }
+    if (mutation.type === "childList" && !mutation.target.childNodes.length) {
+      console.log("NO CHILDREN!!!!!");
+    }
+  }
+};
+
+const observer = new MutationObserver(cb);
+
+// Start observing the target node for configured mutations
+observer.observe(CONTAINER, config);
