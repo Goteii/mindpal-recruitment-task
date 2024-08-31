@@ -1,3 +1,5 @@
+import "./styles.scss";
+
 (() => {
-  console.log("project init");
+  console.log("project ainit");
 })();

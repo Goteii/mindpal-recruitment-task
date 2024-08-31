@@ -1,0 +1,6 @@
+@use "./tokens" as token;
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400,500&display=swap");
+
+* {
+  font-family: token.getFont("primary"), sans-serif;
+}

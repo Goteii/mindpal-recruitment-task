@@ -1,0 +1,23 @@
+@use "./styles/typography" as *;
+@use "./styles/tokens" as token;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.btn {
+  border-radius: token.getRadius("12px");
+  padding: token.getSpacing("8px") 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn.btn-primary {
+  color: token.getColor("text", "bright");
+  background: token.getColor("primary", "default");
+  border: 0;
+}
