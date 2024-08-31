@@ -28,6 +28,7 @@ $color: (
   ),
   "text": (
     "dark": #1b1c1e,
+    "dark_lighten100": #3b3c3e,
     "bright": #fff,
     "placeholder": #5b5c5e,
     "neutral": #0f75b8,
@@ -93,6 +94,10 @@ $lineHeight: (
   "lg": 1.875rem,
 );
 
+$shadow: (
+  "default": 0px 4px 16px 0px #00000012,
+);
+
 //map getters
 @function getFont($key) {
   @if map-has-key($font, $key) {
@@ -132,5 +137,10 @@ $lineHeight: (
 @function getLineHeight($key) {
   @if map-has-key($lineHeight, $key) {
     @return map-get($lineHeight, $key);
+  }
+}
+@function getShadow($key) {
+  @if map-has-key($shadow, $key) {
+    @return map-get($shadow, $key);
   }
 }

@@ -16,7 +16,7 @@
         <img
           src="<%= require('./assets/note.svg') %>"
           loading="eager"
-          alt="Note"
+          alt="A note"
         />
         <h1>Notes</h1>
       </button>
@@ -25,7 +25,8 @@
     <section class="search">
       <input class="text-field search-input" placeholder="Search notes..." />
     </section>
-    <section class="no-notes" id="no-notes">
+    <!-- no notes view-->
+    <section class="no-notes-container" id="no-notes-container">
       <div class="details">
         <img
           src="<%= require('./assets/information.svg') %>"
@@ -37,10 +38,190 @@
         <p class="description">Add a note to keep track of your learnings.</p>
       </div>
       <button class="btn btn-secondary add-note">
-        <img src="<%= require('./assets/note_add.svg') %>" alt="" />
+        <img
+          src="<%= require('./assets/note_add.svg') %>"
+          alt=""
+          loading="eager"
+        />
         <span>Add Note</span>
       </button>
-      <!-- action btn-->
+    </section>
+
+    <section class="notes-container" id="notes-container">
+      <button class="btn btn-primary add-note-primary">Add New</button>
+
+      <section class="note-tile">
+        <div class="note-header">
+          <h2 class="note-title">
+            Note Title dfoys oyeroy eoryo ery weoryworywo ry oweyrwo y
+          </h2>
+          <div class="actions">
+            <button class="action-btn edit-action" id="edit-note">
+              <img
+                src="<%= require('./assets/edit.svg') %>"
+                alt="Edit note"
+                loading="lazy"
+              />
+            </button>
+            <button class="action-btn remove-action" id="remove-note">
+              <img
+                src="<%= require('./assets/remove.svg') %>"
+                alt="Remove note"
+                loading="lazy"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="note-body">
+          <p>
+            Note Body asudg ewr p ys orew hewoui gwio egwioew rwioy qwiye
+            iowqyer iwoyriow
+          </p>
+        </div>
+        <div class="note-footer">
+          <p>May 22</p>
+        </div>
+      </section>
+
+      <section class="note-tile">
+        <div class="note-header">
+          <h2 class="note-title">Note Title</h2>
+          <div class="actions">
+            <button class="action-btn edit-action" id="edit-note">
+              <img
+                src="<%= require('./assets/edit.svg') %>"
+                alt="Edit note"
+                loading="lazy"
+              />
+            </button>
+            <button class="action-btn remove-action" id="remove-note">
+              <img
+                src="<%= require('./assets/remove.svg') %>"
+                alt="Remove note"
+                loading="lazy"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="note-body">
+          <p>Note Body</p>
+        </div>
+        <div class="note-footer">
+          <p>May 22</p>
+        </div>
+      </section>
+
+      <section class="note-tile">
+        <div class="note-header">
+          <h2 class="note-title">Note Title</h2>
+          <div class="actions">
+            <button class="action-btn edit-action" id="edit-note">
+              <img
+                src="<%= require('./assets/edit.svg') %>"
+                alt="Edit note"
+                loading="lazy"
+              />
+            </button>
+            <button class="action-btn remove-action" id="remove-note">
+              <img
+                src="<%= require('./assets/remove.svg') %>"
+                alt="Remove note"
+                loading="lazy"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="note-body">
+          <p>Note Body</p>
+        </div>
+        <div class="note-footer">
+          <p>May 22</p>
+        </div>
+      </section>
+
+      <section class="note-tile">
+        <div class="note-header">
+          <h2 class="note-title">Note Title</h2>
+          <div class="actions">
+            <button class="action-btn edit-action" id="edit-note">
+              <img
+                src="<%= require('./assets/edit.svg') %>"
+                alt="Edit note"
+                loading="lazy"
+              />
+            </button>
+            <button class="action-btn remove-action" id="remove-note">
+              <img
+                src="<%= require('./assets/remove.svg') %>"
+                alt="Remove note"
+                loading="lazy"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="note-body">
+          <p>Note Body</p>
+        </div>
+        <div class="note-footer">
+          <p>May 22</p>
+        </div>
+      </section>
+
+      <section class="note-tile">
+        <div class="note-header">
+          <h2 class="note-title">Note Title</h2>
+          <div class="actions">
+            <button class="action-btn edit-action" id="edit-note">
+              <img
+                src="<%= require('./assets/edit.svg') %>"
+                alt="Edit note"
+                loading="lazy"
+              />
+            </button>
+            <button class="action-btn remove-action" id="remove-note">
+              <img
+                src="<%= require('./assets/remove.svg') %>"
+                alt="Remove note"
+                loading="lazy"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="note-body">
+          <p>Note Body</p>
+        </div>
+        <div class="note-footer">
+          <p>May 22</p>
+        </div>
+      </section>
+
+      <section class="note-tile">
+        <div class="note-header">
+          <h2 class="note-title">Note Title</h2>
+          <div class="actions">
+            <button class="action-btn edit-action" id="edit-note">
+              <img
+                src="<%= require('./assets/edit.svg') %>"
+                alt="Edit note"
+                loading="lazy"
+              />
+            </button>
+            <button class="action-btn remove-action" id="remove-note">
+              <img
+                src="<%= require('./assets/remove.svg') %>"
+                alt="Remove note"
+                loading="lazy"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="note-body">
+          <p>Note Body</p>
+        </div>
+        <div class="note-footer">
+          <p>May 22</p>
+        </div>
+      </section>
     </section>
 
     <!-- dynamic content -->
