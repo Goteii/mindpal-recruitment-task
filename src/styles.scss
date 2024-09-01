@@ -132,6 +132,10 @@
   line-height: token.getLineHeight("sm");
   color: token.getColor("text", "dark_lighten100");
 }
+.note-body > p {
+  overflow-wrap: break-word;
+  text-wrap: wrap;
+}
 .note-footer {
   font-size: token.getFontSize("vsm");
   line-height: token.getLineHeight("vsm");
@@ -150,6 +154,7 @@
   padding: token.getSpacing("24px");
   border-radius: token.getRadius("16px");
   gap: token.getSpacing("24px");
+  max-width: 620px;
 }
 
 .modal > .modal-container {
