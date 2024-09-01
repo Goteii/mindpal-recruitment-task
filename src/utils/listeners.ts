@@ -4,6 +4,7 @@ import {
   createAddNewNoteViewElement,
   createEditNoteViewElement,
   createNoNotesViewElement,
+  createNoResultsViewElement,
   createNoteElement,
   retrieveNoteElement,
   saveNoteElement,
@@ -20,6 +21,11 @@ import {
 export const addNoNotesAddNoteListener = (): void => {
   const addNote = document.getElementById("add-note")!;
   addNote.addEventListener("click", createAddNewNoteView);
+};
+
+export const addSearchNotesListener = (): void => {
+  const search = document.getElementById("search-notes") as HTMLInputElement;
+  search.addEventListener("input", () => filterResults(search.value));
 };
 
 const addNewNoteCancelListener = (): void => {
@@ -150,6 +156,7 @@ const addNewNote = (): void => {
     const addNewNotePrimaryBtn = createAddNewNoteBtnElement();
     const notes = getNotes();
     const id = newNote.getAttribute("data-id")!;
+    changeSearchState("enable");
     if (notes.length) {
       container.firstChild!.remove();
       container.prepend(addNewNotePrimaryBtn);
@@ -210,12 +217,65 @@ const removeNoteConfirm = (id: string) => {
     const container = document.getElementById("container")!;
     const noNotesView = createNoNotesViewElement();
     container.replaceChildren(noNotesView);
+    changeSearchState("disable");
 
     addNoNotesAddNoteListener();
+    return;
   }
+  const searchPhrase = (
+    document.getElementById("search-notes") as HTMLInputElement
+  ).value;
+  filterResults(searchPhrase);
 };
 
 const removeNoteCancel = () => {
   const modal = document.getElementById("modal") as HTMLDialogElement;
   modal.close();
+};
+
+const changeSearchState = (state: "enable" | "disable") => {
+  const search = document.getElementById("search-notes") as HTMLInputElement;
+  if (state === "enable") {
+    search.removeAttribute("disabled");
+  } else {
+    search.value = "";
+    search.setAttribute("disabled", "true");
+  }
+};
+
+const filterResults = (val: string) => {
+  const notes = getNotes() as HTMLElement[];
+  if (!val) {
+    notes.forEach((note) => {
+      note.classList.remove("hide");
+    });
+  }
+  const resultsIds = notes
+    .filter((note) => {
+      const id = note.getAttribute("data-id")!;
+      const details = getNoteDetails(id);
+      return details.body.includes(val) || details.title.includes(val);
+    })
+    .map((el) => el.getAttribute("data-id"));
+
+  const noResultElement = document.getElementById("no-results");
+
+  if (!resultsIds.length && !noResultElement) {
+    //create element 'no results'
+    const noResultsView = createNoResultsViewElement();
+    const container = getMainContainer();
+    container.appendChild(noResultsView);
+  }
+
+  if (noResultElement && resultsIds.length) {
+    noResultElement.remove();
+  }
+
+  notes.forEach((note) => {
+    if (!resultsIds.includes(note.getAttribute("data-id"))) {
+      note.classList.add("hide");
+    } else {
+      note.classList.remove("hide");
+    }
+  });
 };

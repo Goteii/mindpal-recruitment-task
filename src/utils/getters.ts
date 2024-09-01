@@ -1,4 +1,4 @@
-export const getNotes = (): Node[] => {
+export const getNotes = (): HTMLElement[] => {
   return Array.from(document.querySelectorAll(".note-tile"));
 };
 

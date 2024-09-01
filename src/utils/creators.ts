@@ -69,9 +69,9 @@ export const createNoNotesViewElement = (): HTMLElement => {
     className: "description",
   });
 
-  details.appendChild(informationImg);
-  details.appendChild(heading);
-  details.appendChild(detailsParagraph);
+  [informationImg, heading, detailsParagraph].forEach((node) =>
+    details.appendChild(node)
+  );
 
   const button = createButtonElement({
     className: "btn btn-secondary add-note",
@@ -195,6 +195,37 @@ export const createEditNoteViewElement = (
 
   section.appendChild(heading);
   section.appendChild(noteBody);
+
+  return section;
+};
+
+export const createNoResultsViewElement = (): HTMLElement => {
+  const section = createSectionElement("no-results");
+  section.id = "no-results";
+
+  const details = createDivElement("details");
+  const informationImg = createImageElement({
+    src: require("../assets/no-results.svg"),
+    loading: "lazy",
+    alt: "Sad emoji",
+    className: "information",
+  });
+  const heading = createHeadingElement({
+    textContent: "We could not find any matching results",
+    className: "heading",
+  });
+  const detailsParagraph = createTextElement({
+    type: "p",
+    textContent:
+      "Looks like you don't have a note with title or body matching your phrase. Try to rephrase or create a new note.",
+    className: "description",
+  });
+
+  [informationImg, heading, detailsParagraph].forEach((node) =>
+    details.appendChild(node)
+  );
+
+  section.appendChild(details);
 
   return section;
 };

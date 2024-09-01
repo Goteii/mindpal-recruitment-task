@@ -220,8 +220,8 @@ dialog::backdrop {
 .add-new-note.btn.btn-primary,
 .edit-note.btn.btn-primary {
   position: absolute;
-  bottom: 16px;
-  right: 16px;
+  bottom: token.getSpacing("16px");
+  right: token.getSpacing("16px");
 }
 
 .note-body-textarea {
@@ -232,4 +232,12 @@ dialog::backdrop {
 .note-tile.note-edit-mode {
   width: 100%;
   padding: 0;
+}
+
+input[disabled] {
+  cursor: not-allowed;
+}
+
+.hide {
+  display: none;
 }

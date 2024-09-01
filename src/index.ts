@@ -1,4 +1,8 @@
 import "./styles.scss";
-import { addNoNotesAddNoteListener } from "./utils/listeners";
+import {
+  addNoNotesAddNoteListener,
+  addSearchNotesListener,
+} from "./utils/listeners";
 
 addNoNotesAddNoteListener();
+addSearchNotesListener();
