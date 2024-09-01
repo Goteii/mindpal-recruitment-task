@@ -9,7 +9,7 @@ import { getNoteById } from "./getters";
 
 let idx = 0;
 
-export const createAddNewNoteView = (): HTMLElement => {
+export const createAddNewNoteViewElement = (): HTMLElement => {
   const section = createSection("add-new-note-container");
 
   const heading = createDiv("add-new-note-heading");
@@ -137,7 +137,7 @@ export const saveNote = (id: string): HTMLElement => {
   return retrieveNote({ id, title, body });
 };
 
-export const createAddNewNoteBtn = (): HTMLButtonElement => {
+export const createAddNewNoteBtnElement = (): HTMLButtonElement => {
   return createButton({
     className: "btn btn-primary add-note-primary",
     id: "add-new-note-primary",

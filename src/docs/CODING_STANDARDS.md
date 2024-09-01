@@ -1,0 +1,5 @@
+## CODING STANDARDS
+
+### Structure
+
+###

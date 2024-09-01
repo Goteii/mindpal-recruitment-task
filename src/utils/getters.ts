@@ -21,3 +21,7 @@ export const getNoteDetails = (id: string): { title: string; body: string } => {
       .textContent || "";
   return { title, body };
 };
+
+export const getMainContainer = (): HTMLElement => {
+  return document.getElementById("container")!;
+};
