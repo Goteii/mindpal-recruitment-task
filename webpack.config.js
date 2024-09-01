@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const ENTRY_PATH = path.resolve(__dirname, "src/index");
-const DIST_PATH = path.resolve(__dirname, "dist");
+const DIST_PATH = path.resolve(__dirname, "src/dist");
 const TEMPLATE_PATH = path.resolve(__dirname, "src/index.html");
 
 module.exports = {
