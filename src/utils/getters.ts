@@ -1,3 +1,5 @@
+import { MONTH } from "../constants/month";
+
 export const getNotes = (): HTMLElement[] => {
   return Array.from(document.querySelectorAll(".note-tile"));
 };
@@ -23,4 +25,9 @@ export const getNoteDetails = (id: string): { title: string; body: string } => {
 
 export const getMainContainer = (): HTMLElement => {
   return document.getElementById("container")!;
+};
+
+export const getCurrentDate = () => {
+  const date = new Date();
+  return `${MONTH[date.getMonth()]} ${date.getDate()}`;
 };

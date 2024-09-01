@@ -5,7 +5,7 @@ import { Input } from "../models/input.model";
 import { NoteDetails } from "../models/note-details.model";
 import { CustomText } from "../models/text.model";
 import { Textarea } from "../models/textarea.model";
-import { getNoteById } from "./getters";
+import { getCurrentDate, getNoteById } from "./getters";
 
 let idx = 0;
 
@@ -357,7 +357,7 @@ const createNoteTileFooterElement = (): HTMLElement => {
   const noteFooter = createDivElement("note-footer");
   const noteFooterText = createTextElement({
     type: "p",
-    textContent: "May 22",
+    textContent: getCurrentDate(),
   });
 
   noteFooter.appendChild(noteFooterText);

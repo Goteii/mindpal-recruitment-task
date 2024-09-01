@@ -261,7 +261,6 @@ const filterResults = (val: string) => {
   const noResultElement = document.getElementById("no-results");
 
   if (!resultsIds.length && !noResultElement) {
-    //create element 'no results'
     const noResultsView = createNoResultsViewElement();
     const container = getMainContainer();
     container.appendChild(noResultsView);
