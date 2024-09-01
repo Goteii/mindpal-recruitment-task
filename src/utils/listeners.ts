@@ -6,7 +6,7 @@ import {
 } from "./creators";
 import { getBtnId, getNoteById, getNotes } from "./getters";
 
-export const noNotesAddNoteListener = () => {
+export const noNotesAddNoteListener = (): void => {
   const addNote = document.getElementById("add-note")!;
   addNote.addEventListener("click", () => {
     const addNoteSection = createAddNewNoteView();
@@ -18,7 +18,7 @@ export const noNotesAddNoteListener = () => {
   });
 };
 
-const addNewNoteCancelListener = () => {
+const addNewNoteCancelListener = (): void => {
   const cancel = document.getElementById("add-note-cancel")!;
   cancel.addEventListener("click", () => {
     const notes = getNotes();
@@ -37,7 +37,7 @@ const addNewNoteCancelListener = () => {
   });
 };
 
-const addNewNoteAddNoteListener = () => {
+const addNewNoteAddNoteListener = (): void => {
   const addNote = document.getElementById("add-new-note")!;
   addNote.addEventListener("click", () => {
     const newNote = createNote();
@@ -88,7 +88,7 @@ const addNewNoteAddNoteListener = () => {
   });
 };
 
-const addNewNotePrimaryListener = () => {
+const addNewNotePrimaryListener = (): void => {
   const addNote = document.getElementById("add-new-note-primary")!;
   addNote.addEventListener("click", () => {
     const addNoteSection = createAddNewNoteView();
@@ -116,7 +116,7 @@ const editNoteListener = (e: Event): void => {
   //swap note CONTENT with createNoteView (probably needs to be seperated method so we can pass title and body)
 };
 
-const removeNoteListener = (e: Event) => {
+const removeNoteListener = (e: Event): void => {
   const target = e.target as HTMLElement;
   const id = getBtnId(target);
   const modal = document.getElementById("modal") as HTMLDialogElement;
@@ -126,7 +126,7 @@ const removeNoteListener = (e: Event) => {
   modalCancelListener();
 };
 
-const modalRemoveNoteListener = (id: string) => {
+const modalRemoveNoteListener = (id: string): void => {
   const modal = document.getElementById("modal") as HTMLDialogElement;
   const removeBtn = document.getElementById(
     "modal-remove"
@@ -149,7 +149,7 @@ const modalRemoveNoteListener = (id: string) => {
   });
 };
 
-const modalCancelListener = () => {
+const modalCancelListener = (): void => {
   const modal = document.getElementById("modal") as HTMLDialogElement;
   const cancelBtn = document.getElementById(
     "modal-cancel"

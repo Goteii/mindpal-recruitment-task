@@ -48,10 +48,10 @@
   line-height: token.getLineHeight("md");
 }
 .text-field:hover {
-  background: token.getColor("bg", "bright_darken300");
+  background-color: token.getColor("bg", "bright_darken300");
 }
 .text-field:focus {
-  background: token.getColor("bg", "bright");
+  background-color: token.getColor("bg", "bright");
 }
 
 .text-field::placeholder {
