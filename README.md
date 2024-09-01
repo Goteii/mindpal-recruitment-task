@@ -1,1 +1,0 @@
-# mindpal-recruitment-task
