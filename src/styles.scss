@@ -183,7 +183,8 @@ dialog::backdrop {
 }
 
 //add new note
-.add-new-note-container {
+.add-new-note-container,
+.edit-note-container {
   padding: token.getSpacing("20px") token.getSpacing("16px");
   width: 100%;
   display: flex;
@@ -195,25 +196,29 @@ dialog::backdrop {
   border-color: token.getColor("bg", "bright_darken200");
 }
 
-.add-new-note-heading {
+.add-new-note-heading,
+.edit-note-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.add-new-note-heading > h2 {
+.add-new-note-heading > h2,
+.edit-note-heading > h2 {
   font-weight: token.getFontWeight("medium");
   font-size: token.getFontSize("md");
   line-height: token.getLineHeight("md-lg");
 }
 
-.add-new-note-body {
+.add-new-note-body,
+.edit-note-body {
   display: flex;
   flex-direction: column;
   gap: token.getSpacing("16px");
   position: relative;
 }
 
-.add-new-note.btn.btn-primary {
+.add-new-note.btn.btn-primary,
+.edit-note.btn.btn-primary {
   position: absolute;
   bottom: 16px;
   right: 16px;
@@ -222,4 +227,9 @@ dialog::backdrop {
 .note-body-textarea {
   resize: vertical;
   min-height: 210px;
+}
+
+.note-tile.note-edit-mode {
+  width: 100%;
+  padding: 0;
 }

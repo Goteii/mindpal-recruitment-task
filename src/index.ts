@@ -1,4 +1,6 @@
 import "./styles.scss";
+import { createNoNotesView } from "./utils/creators";
+import { getNotes } from "./utils/getters";
 import { noNotesAddNoteListener } from "./utils/listeners";
 
 const CONTAINER = document.getElementById("container")!;
@@ -30,13 +32,14 @@ noNotesAddNoteListener();
 //       console.log("A child node has been added or removed.");
 //       console.log(mutation);
 //       console.log(mutation.target.childNodes.length);
+//       console.log(mutation.target.firstChild);
 //       const notes = getNotes().length;
 //       console.log("notes", notes);
-//       if (!notes) {
-//         const noNotesView = createNoNotesView();
-//         const container = document.getElementById("container")!;
-//         console.log("hello");
-//       }
+//       //   if (!notes) {
+//       //     const noNotesView = createNoNotesView();
+//       //     const container = document.getElementById("container")!;
+//       //     console.log("hello");
+//       //   }
 //     }
 //   }
 // };
