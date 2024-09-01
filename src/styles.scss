@@ -48,8 +48,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100dvh - 130px);
+  height: calc(100dvh - 150px);
   gap: token.getSpacing("16px");
+  overflow-y: auto;
 }
 .details-wrapper {
   padding: 0 token.getSpacing("16px");

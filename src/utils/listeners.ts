@@ -18,6 +18,11 @@ import {
 } from "./getters";
 
 //listeners attachments
+export const addScrollUpListener = (): void => {
+  const scroll = document.getElementById("scroll-up")!;
+  scroll.addEventListener("click", scrollUp);
+};
+
 export const addNoNotesAddNoteListener = (): void => {
   const addNote = document.getElementById("add-note")!;
   addNote.addEventListener("click", createAddNewNoteView);
@@ -196,7 +201,7 @@ const editNote = (id: string) => {
   addRemoveNoteListener(id);
 };
 
-const cancelEditNote = (details: NoteDetails) => {
+const cancelEditNote = (details: NoteDetails): void => {
   const { id } = details;
   const note = getNoteById(id);
   note.classList.remove("note-edit-mode");
@@ -206,7 +211,7 @@ const cancelEditNote = (details: NoteDetails) => {
   addRemoveNoteListener(id);
 };
 
-const removeNoteConfirm = (id: string) => {
+const removeNoteConfirm = (id: string): void => {
   const modal = document.getElementById("modal") as HTMLDialogElement;
   getNoteById(id)?.remove();
   modal.close();
@@ -228,12 +233,12 @@ const removeNoteConfirm = (id: string) => {
   filterResults(searchPhrase);
 };
 
-const removeNoteCancel = () => {
+const removeNoteCancel = (): void => {
   const modal = document.getElementById("modal") as HTMLDialogElement;
   modal.close();
 };
 
-const changeSearchState = (state: "enable" | "disable") => {
+const changeSearchState = (state: "enable" | "disable"): void => {
   const search = document.getElementById("search-notes") as HTMLInputElement;
   if (state === "enable") {
     search.removeAttribute("disabled");
@@ -243,7 +248,7 @@ const changeSearchState = (state: "enable" | "disable") => {
   }
 };
 
-const filterResults = (val: string) => {
+const filterResults = (val: string): void => {
   const notes = getNotes() as HTMLElement[];
   if (!val) {
     notes.forEach((note) => {
@@ -276,5 +281,13 @@ const filterResults = (val: string) => {
     } else {
       note.classList.remove("hide");
     }
+  });
+};
+
+const scrollUp = (): void => {
+  const container = getMainContainer();
+  container.scrollTo({
+    behavior: "smooth",
+    top: 0,
   });
 };
