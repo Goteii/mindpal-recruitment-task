@@ -2,11 +2,11 @@ import { NoteDetails } from "../models/note-details.model";
 import {
   createAddNewNoteBtnElement,
   createAddNewNoteViewElement,
-  createEditNoteView,
-  createNoNotesView,
-  createNote,
-  retrieveNote,
-  saveNote,
+  createEditNoteViewElement,
+  createNoNotesViewElement,
+  createNoteElement,
+  retrieveNoteElement,
+  saveNoteElement,
 } from "./creators";
 import {
   getBtnId,
@@ -81,7 +81,7 @@ const editNoteListener = (e: Event): void => {
 
   const { title, body } = getNoteDetails(id);
 
-  const editNoteView = createEditNoteView({ id, title, body });
+  const editNoteView = createEditNoteViewElement({ id, title, body });
 
   note.classList.add("note-edit-mode");
 
@@ -125,7 +125,7 @@ const cancelNewNote = (): void => {
     createAddNotePrimaryBtn();
     return;
   }
-  const noNotesView = createNoNotesView();
+  const noNotesView = createNoNotesViewElement();
   const container = document.getElementById("container");
   container?.replaceChildren(noNotesView);
   addNoNotesAddNoteListener();
@@ -145,7 +145,7 @@ const addNewNote = (): void => {
       .value;
     const body = (document.getElementById("note-body") as HTMLTextAreaElement)
       .value;
-    const newNote = createNote(title, body);
+    const newNote = createNoteElement(title, body);
     const container = document.getElementById("container")!;
     const addNewNotePrimaryBtn = createAddNewNoteBtnElement();
     const notes = getNotes();
@@ -184,7 +184,7 @@ const editNote = (id: string) => {
   const note = getNoteById(id);
   note.classList.remove("note-edit-mode");
 
-  saveNote(id);
+  saveNoteElement(id);
   addEditNoteListener(id);
   addRemoveNoteListener(id);
 };
@@ -194,7 +194,7 @@ const cancelEditNote = (details: NoteDetails) => {
   const note = getNoteById(id);
   note.classList.remove("note-edit-mode");
 
-  retrieveNote(details);
+  retrieveNoteElement(details);
   addEditNoteListener(id);
   addRemoveNoteListener(id);
 };
@@ -208,7 +208,7 @@ const removeNoteConfirm = (id: string) => {
 
   if (!notes) {
     const container = document.getElementById("container")!;
-    const noNotesView = createNoNotesView();
+    const noNotesView = createNoNotesViewElement();
     container.replaceChildren(noNotesView);
 
     addNoNotesAddNoteListener();

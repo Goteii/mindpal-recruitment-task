@@ -12,7 +12,6 @@ export const getNoteById = (id: string): HTMLElement => {
 };
 
 export const getNoteDetails = (id: string): { title: string; body: string } => {
-  console.log("id", id);
   const title =
     (document.getElementById("note-title-" + id) as HTMLHeadingElement)
       .textContent || "";

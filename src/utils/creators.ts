@@ -10,11 +10,11 @@ import { getNoteById } from "./getters";
 let idx = 0;
 
 export const createAddNewNoteViewElement = (): HTMLElement => {
-  const section = createSection("add-new-note-container");
+  const section = createSectionElement("add-new-note-container");
 
-  const heading = createDiv("add-new-note-heading");
-  const headingHeader = createHeading({ textContent: "Add new note" });
-  const headingButton = createButton({
+  const heading = createDivElement("add-new-note-heading");
+  const headingHeader = createHeadingElement({ textContent: "Add new note" });
+  const headingButton = createButtonElement({
     className: "btn btn-cancel",
     textContent: "Cancel",
     id: "add-note-cancel",
@@ -23,18 +23,18 @@ export const createAddNewNoteViewElement = (): HTMLElement => {
   heading.appendChild(headingHeader);
   heading.appendChild(headingButton);
 
-  const body = createDiv("add-new-note-body");
-  const bodyInput = createInput({
+  const body = createDivElement("add-new-note-body");
+  const bodyInput = createInputElement({
     className: "text-field",
     id: "note-title",
     placeholder: "Untitled Note",
   });
-  const bodyTextarea = createTextarea({
+  const bodyTextarea = createTextElementareaElement({
     className: "text-field note-body-textarea",
     id: "note-body",
     placeholder: "Your note...",
   });
-  const bodyButton = createButton({
+  const bodyButton = createButtonElement({
     className: "btn btn-primary add-new-note",
     textContent: "Add",
     id: "add-new-note",
@@ -49,21 +49,21 @@ export const createAddNewNoteViewElement = (): HTMLElement => {
   return section;
 };
 
-export const createNoNotesView = (): HTMLElement => {
-  const wrapper = createDiv("details-wrapper");
+export const createNoNotesViewElement = (): HTMLElement => {
+  const wrapper = createDivElement("details-wrapper");
 
-  const details = createDiv("details");
-  const informationImg = createImage({
+  const details = createDivElement("details");
+  const informationImg = createImageElement({
     src: require("../assets/information.svg"),
     loading: "eager",
     alt: "Information circle",
     className: "information",
   });
-  const heading = createHeading({
+  const heading = createHeadingElement({
     textContent: "No notes yet",
     className: "heading",
   });
-  const detailsParagraph = createText({
+  const detailsParagraph = createTextElement({
     type: "p",
     textContent: "Add a note to keep track of your learnings.",
     className: "description",
@@ -73,18 +73,18 @@ export const createNoNotesView = (): HTMLElement => {
   details.appendChild(heading);
   details.appendChild(detailsParagraph);
 
-  const button = createButton({
+  const button = createButtonElement({
     className: "btn btn-secondary add-note",
     id: "add-note",
   });
 
-  const noteAddImg = createImage({
+  const noteAddImg = createImageElement({
     src: require("../assets/note_add.svg"),
     alt: "",
     loading: "eager",
   });
 
-  const btnText = createText({ type: "span", textContent: "Add Note" });
+  const btnText = createTextElement({ type: "span", textContent: "Add Note" });
 
   button.appendChild(noteAddImg);
   button.appendChild(btnText);
@@ -95,13 +95,16 @@ export const createNoNotesView = (): HTMLElement => {
   return wrapper;
 };
 
-export const createNote = (titleVal: string, bodyVal: string): HTMLElement => {
-  const section = createSection("note-tile");
+export const createNoteElement = (
+  titleVal: string,
+  bodyVal: string
+): HTMLElement => {
+  const section = createSectionElement("note-tile");
   section.setAttribute("data-id", idx.toString());
 
-  const noteHeader = createNoteTileHeader(titleVal, idx.toString());
-  const noteBody = createNoteTileBody(bodyVal, idx.toString());
-  const noteFooter = createNoteTileFooter();
+  const noteHeader = createNoteTileHeaderElement(titleVal, idx.toString());
+  const noteBody = createNoteTileBodyElement(bodyVal, idx.toString());
+  const noteFooter = createNoteTileFooterElement();
 
   [noteHeader, noteBody, noteFooter].forEach((node) =>
     section.appendChild(node)
@@ -112,21 +115,21 @@ export const createNote = (titleVal: string, bodyVal: string): HTMLElement => {
   return section;
 };
 
-export const retrieveNote = (details: NoteDetails): HTMLElement => {
+export const retrieveNoteElement = (details: NoteDetails): HTMLElement => {
   const { title, body, id } = details;
   const note = getNoteById(id);
 
   Array.from(note.children).forEach((child) => child.remove());
 
-  const noteHeader = createNoteTileHeader(title, id);
-  const noteBody = createNoteTileBody(body, id);
-  const noteFooter = createNoteTileFooter();
+  const noteHeader = createNoteTileHeaderElement(title, id);
+  const noteBody = createNoteTileBodyElement(body, id);
+  const noteFooter = createNoteTileFooterElement();
 
   [noteHeader, noteBody, noteFooter].forEach((node) => note.appendChild(node));
   return note;
 };
 
-export const saveNote = (id: string): HTMLElement => {
+export const saveNoteElement = (id: string): HTMLElement => {
   const title = (
     document.getElementById("edit-note-title-" + id) as HTMLInputElement
   ).value;
@@ -134,24 +137,29 @@ export const saveNote = (id: string): HTMLElement => {
     document.getElementById("edit-note-body-" + id) as HTMLTextAreaElement
   ).value;
 
-  return retrieveNote({ id, title, body });
+  return retrieveNoteElement({ id, title, body });
 };
 
 export const createAddNewNoteBtnElement = (): HTMLButtonElement => {
-  return createButton({
+  return createButtonElement({
     className: "btn btn-primary add-note-primary",
     id: "add-new-note-primary",
     textContent: "Add New",
   });
 };
 
-export const createEditNoteView = (payload: NoteDetails): HTMLElement => {
+export const createEditNoteViewElement = (
+  payload: NoteDetails
+): HTMLElement => {
   const { id, title, body } = payload;
-  const section = createSection("edit-note-container");
+  const section = createSectionElement("edit-note-container");
 
-  const heading = createDiv("edit-note-heading");
-  const header = createHeading({ heading: "h2", textContent: "Edit note" });
-  const cancelBtn = createButton({
+  const heading = createDivElement("edit-note-heading");
+  const header = createHeadingElement({
+    heading: "h2",
+    textContent: "Edit note",
+  });
+  const cancelBtn = createButtonElement({
     className: "btn btn-cancel",
     id: "edit-note-cancel-btn-" + id,
     "data-id": id,
@@ -161,20 +169,20 @@ export const createEditNoteView = (payload: NoteDetails): HTMLElement => {
   heading.appendChild(header);
   heading.appendChild(cancelBtn);
 
-  const noteBody = createDiv("edit-note-body");
-  const noteTitleInput = createInput({
+  const noteBody = createDivElement("edit-note-body");
+  const noteTitleInput = createInputElement({
     className: "text-field",
     id: "edit-note-title-" + id,
     placeholder: "Untitlted Note",
     value: title,
   });
-  const noteBodyTextarea = createTextarea({
+  const noteBodyTextarea = createTextElementareaElement({
     className: "text-field note-body-textarea",
     id: "edit-note-body-" + id,
     placeholder: "Your note...",
     value: body,
   });
-  const editBtn = createButton({
+  const editBtn = createButtonElement({
     className: "btn btn-primary edit-note",
     id: "edit-note-btn-" + id,
     "data-id": id,
@@ -192,19 +200,19 @@ export const createEditNoteView = (payload: NoteDetails): HTMLElement => {
 };
 
 //private node creators
-const createSection = (className: string): HTMLElement => {
+const createSectionElement = (className: string): HTMLElement => {
   const section = document.createElement("section");
   section.className = className;
   return section;
 };
 
-const createDiv = (className: string): HTMLDivElement => {
+const createDivElement = (className: string): HTMLDivElement => {
   const div = document.createElement("div");
   div.className = className;
   return div;
 };
 
-const createInput = (payload: Input): HTMLInputElement => {
+const createInputElement = (payload: Input): HTMLInputElement => {
   const input = document.createElement("input");
   input.className = payload.className;
   input.id = payload.id;
@@ -213,7 +221,9 @@ const createInput = (payload: Input): HTMLInputElement => {
   return input;
 };
 
-const createTextarea = (payload: Textarea): HTMLTextAreaElement => {
+const createTextElementareaElement = (
+  payload: Textarea
+): HTMLTextAreaElement => {
   const textarea = document.createElement("textarea");
   textarea.className = payload.className;
   textarea.id = payload.id;
@@ -221,7 +231,7 @@ const createTextarea = (payload: Textarea): HTMLTextAreaElement => {
   textarea.value = payload.value || "";
   return textarea;
 };
-const createButton = (payload: Button): HTMLButtonElement => {
+const createButtonElement = (payload: Button): HTMLButtonElement => {
   const button = document.createElement("button");
   button.className = payload.className;
   button.textContent = payload.textContent || "";
@@ -230,21 +240,21 @@ const createButton = (payload: Button): HTMLButtonElement => {
   return button;
 };
 
-const createHeading = (payload: Heading): HTMLElement => {
+const createHeadingElement = (payload: Heading): HTMLElement => {
   const heading = document.createElement(payload.heading || "h2");
   heading.textContent = payload.textContent;
   heading.className = payload.className || "";
   heading.id = payload.id || "";
   return heading;
 };
-const createImage = (payload: CustomImage): HTMLImageElement => {
+const createImageElement = (payload: CustomImage): HTMLImageElement => {
   const image = document.createElement("img");
   image.src = payload.src;
   image.loading = payload.loading;
   image.alt = payload.alt;
   return image;
 };
-const createText = (
+const createTextElement = (
   payload: CustomText
 ): HTMLSpanElement | HTMLParagraphElement => {
   const text = document.createElement(payload.type);
@@ -254,21 +264,24 @@ const createText = (
   return text;
 };
 //group creators
-const createNoteTileHeader = (title: string, idx: string): HTMLElement => {
-  const noteHeader = createDiv("note-header");
-  const noteTitle = createHeading({
+const createNoteTileHeaderElement = (
+  title: string,
+  idx: string
+): HTMLElement => {
+  const noteHeader = createDivElement("note-header");
+  const noteTitle = createHeadingElement({
     className: "note-title",
     textContent: title,
     id: "note-title-" + idx,
   });
 
-  const actions = createDiv("actions");
-  const editNoteBtn = createButton({
+  const actions = createDivElement("actions");
+  const editNoteBtn = createButtonElement({
     className: "action-btn edit-action",
     id: "edit-note-" + idx,
     "data-id": idx,
   });
-  const editNoteImg = createImage({
+  const editNoteImg = createImageElement({
     alt: "Edit note",
     loading: "lazy",
     src: require("../assets/edit.svg"),
@@ -276,12 +289,12 @@ const createNoteTileHeader = (title: string, idx: string): HTMLElement => {
 
   editNoteBtn.appendChild(editNoteImg);
 
-  const removeNoteBtn = createButton({
+  const removeNoteBtn = createButtonElement({
     className: "action-btn remove-action",
     id: "remove-note-" + idx,
     "data-id": idx,
   });
-  const removeNoteImg = createImage({
+  const removeNoteImg = createImageElement({
     alt: "Remove note",
     loading: "lazy",
     src: require("../assets/remove.svg"),
@@ -297,9 +310,9 @@ const createNoteTileHeader = (title: string, idx: string): HTMLElement => {
 
   return noteHeader;
 };
-const createNoteTileBody = (body: string, idx: string): HTMLElement => {
-  const noteBody = createDiv("note-body");
-  const noteBodyText = createText({
+const createNoteTileBodyElement = (body: string, idx: string): HTMLElement => {
+  const noteBody = createDivElement("note-body");
+  const noteBodyText = createTextElement({
     type: "p",
     textContent: body,
     id: "note-body-" + idx,
@@ -309,9 +322,12 @@ const createNoteTileBody = (body: string, idx: string): HTMLElement => {
 
   return noteBody;
 };
-const createNoteTileFooter = (): HTMLElement => {
-  const noteFooter = createDiv("note-footer");
-  const noteFooterText = createText({ type: "p", textContent: "May 22" });
+const createNoteTileFooterElement = (): HTMLElement => {
+  const noteFooter = createDivElement("note-footer");
+  const noteFooterText = createTextElement({
+    type: "p",
+    textContent: "May 22",
+  });
 
   noteFooter.appendChild(noteFooterText);
   return noteFooter;
