@@ -1,0 +1,27 @@
+export const SELECTOR = {
+  id: {
+    container: "container",
+    scrollUp: "scroll-up",
+    addNote: "add-note",
+    searchNotes: "search-notes",
+    addNoteCancel: "add-note-cancel",
+    addNewNote: "add-new-note",
+    addNewNotePrimary: "add-new-note-primary",
+    editNote: "edit-note-",
+    removeNote: "remove-note-",
+    editNoteBtn: "edit-note-btn-",
+    editNoteCancelBtn: "edit-note-cancel-btn-",
+    modalRemove: "modal-remove",
+    modalCancel: "modal-cancel",
+    noteTitle: "note-title",
+    noteBody: "note-body",
+    noteTitleId: "note-title-",
+    noteBodyId: "note-body-",
+    noResults: "no-results",
+  },
+  class: {
+    noteEditMode: "note-edit-mode",
+    hide: "hide",
+    noteTile: "note-tile",
+  },
+};

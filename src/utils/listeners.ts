@@ -1,4 +1,7 @@
+import { SEARCH_STATE } from "../constants/search.const";
+import { SELECTOR } from "../constants/selector.const";
 import { NoteDetails } from "../models/note-details.model";
+import { SearchState } from "../models/search.model";
 import {
   createAddNewNoteBtnElement,
   createAddNewNoteViewElement,
@@ -15,42 +18,46 @@ import {
   getNoteById,
   getNoteDetails,
   getNotes,
+  getNotesIds,
 } from "./getters";
+import { closeModal, showModal } from "./modal";
 
 //listeners attachments
 export const addScrollUpListener = (): void => {
-  const scroll = document.getElementById("scroll-up")!;
+  const scroll = document.getElementById(SELECTOR.id.scrollUp)!;
   scroll.addEventListener("click", scrollUp);
 };
 
 export const addNoNotesAddNoteListener = (): void => {
-  const addNote = document.getElementById("add-note")!;
+  const addNote = document.getElementById(SELECTOR.id.addNote)!;
   addNote.addEventListener("click", createAddNewNoteView);
 };
 
 export const addSearchNotesListener = (): void => {
-  const search = document.getElementById("search-notes") as HTMLInputElement;
+  const search = document.getElementById(
+    SELECTOR.id.searchNotes
+  ) as HTMLInputElement;
   search.addEventListener("input", () => filterResults(search.value));
 };
 
 const addNewNoteCancelListener = (): void => {
-  const cancel = document.getElementById("add-note-cancel")!;
+  const cancel = document.getElementById(SELECTOR.id.addNoteCancel)!;
   cancel.addEventListener("click", cancelNewNote);
 };
 
 const addNewNoteAddNoteListener = (): void => {
-  const addNote = document.getElementById("add-new-note")!;
+  const addNote = document.getElementById(SELECTOR.id.addNewNote)!;
   addNote.addEventListener("click", addNewNote);
 };
 
 const addNewNotePrimaryBtnListener = (): void => {
-  const addNote = document.getElementById("add-new-note-primary")!;
+  const addNote = document.getElementById(SELECTOR.id.addNewNotePrimary)!;
   addNote.addEventListener("click", addNewNotePrimaryBtn);
 };
 
 const addEditNoteListener = (id: string): void => {
   const editBtn = document.getElementById(
-    "edit-note-" + id
+    SELECTOR.id.editNote + id
   ) as HTMLButtonElement;
 
   editBtn.addEventListener("click", (e) => editNoteListener(e));
@@ -58,27 +65,29 @@ const addEditNoteListener = (id: string): void => {
 
 const addRemoveNoteListener = (id: string): void => {
   const removeBtn = document.getElementById(
-    "remove-note-" + id
+    SELECTOR.id.removeNote + id
   ) as HTMLButtonElement;
   removeBtn.addEventListener("click", (e) => removeNoteListener(e));
 };
 
 const addEditNoteEditListener = (id: string): void => {
-  const editBtn = document.getElementById("edit-note-btn-" + id)!;
+  const editBtn = document.getElementById(SELECTOR.id.editNoteBtn + id)!;
 
   editBtn.addEventListener("click", () => editNote(id));
 };
 
 const addEditNoteCancelListener = (details: NoteDetails): void => {
   const { id } = details;
-  const cancelBtn = document.getElementById("edit-note-cancel-btn-" + id)!;
+  const cancelBtn = document.getElementById(
+    SELECTOR.id.editNoteCancelBtn + id
+  )!;
 
   cancelBtn.addEventListener("click", () => cancelEditNote(details));
 };
 
 const addModalRemoveNoteConfirmListener = (id: string): void => {
   const removeBtn = document.getElementById(
-    "modal-remove"
+    SELECTOR.id.modalRemove
   ) as HTMLButtonElement;
 
   removeBtn.addEventListener("click", () => removeNoteConfirm(id));
@@ -94,7 +103,7 @@ const editNoteListener = (e: Event): void => {
 
   const editNoteView = createEditNoteViewElement({ id, title, body });
 
-  note.classList.add("note-edit-mode");
+  note.classList.add(SELECTOR.class.noteEditMode);
 
   note.replaceChildren(editNoteView);
 
@@ -105,8 +114,7 @@ const editNoteListener = (e: Event): void => {
 const removeNoteListener = (e: Event): void => {
   const target = e.target as HTMLElement;
   const id = getBtnId(target);
-  const modal = document.getElementById("modal") as HTMLDialogElement;
-  modal.showModal();
+  showModal();
 
   addModalRemoveNoteConfirmListener(id);
   addModalRemoveNoteCancelListener();
@@ -114,10 +122,10 @@ const removeNoteListener = (e: Event): void => {
 
 const addModalRemoveNoteCancelListener = (): void => {
   const cancelBtn = document.getElementById(
-    "modal-cancel"
+    SELECTOR.id.modalCancel
   ) as HTMLButtonElement;
 
-  cancelBtn.addEventListener("click", removeNoteCancel);
+  cancelBtn.addEventListener("click", closeModal);
 };
 
 //listeners methods
@@ -137,7 +145,7 @@ const cancelNewNote = (): void => {
     return;
   }
   const noNotesView = createNoNotesViewElement();
-  const container = document.getElementById("container");
+  const container = getMainContainer();
   container?.replaceChildren(noNotesView);
   addNoNotesAddNoteListener();
 };
@@ -152,39 +160,45 @@ const createAddNotePrimaryBtn = (): void => {
 
 const addNewNote = (): void => {
   {
-    const title = (document.getElementById("note-title") as HTMLInputElement)
-      .value;
-    const body = (document.getElementById("note-body") as HTMLTextAreaElement)
-      .value;
+    const title = (
+      document.getElementById(SELECTOR.id.noteTitle) as HTMLInputElement
+    ).value;
+    const body = (
+      document.getElementById(SELECTOR.id.noteBody) as HTMLTextAreaElement
+    ).value;
     const newNote = createNoteElement(title, body);
-    const container = document.getElementById("container")!;
+    const container = getMainContainer()!;
     const addNewNotePrimaryBtn = createAddNewNoteBtnElement();
     const notes = getNotes();
     const id = newNote.getAttribute("data-id")!;
-    changeSearchState("enable");
+    changeSearchState(SEARCH_STATE.enable);
+
     if (notes.length) {
       container.firstChild!.remove();
       container.prepend(addNewNotePrimaryBtn);
       container.appendChild(newNote);
 
-      addEditNoteListener(id);
-      addRemoveNoteListener(id);
-      addNewNotePrimaryBtnListener();
+      addListenersTriggerFilter(id);
 
       return;
     }
     container.replaceChildren(addNewNotePrimaryBtn, newNote);
 
-    addEditNoteListener(id);
-    addRemoveNoteListener(id);
-    addNewNotePrimaryBtnListener();
+    addListenersTriggerFilter(id);
   }
 };
 
+const addListenersTriggerFilter = (id: string): void => {
+  triggerFilter();
+  addEditNoteListener(id);
+  addRemoveNoteListener(id);
+  addNewNotePrimaryBtnListener();
+};
+
 const addNewNotePrimaryBtn = (): void => {
-  const addNote = document.getElementById("add-new-note-primary")!;
+  const addNote = document.getElementById(SELECTOR.id.addNewNotePrimary)!;
   const addNoteSection = createAddNewNoteViewElement();
-  const container = document.getElementById("container")!;
+  const container = getMainContainer()!;
   addNote.remove();
   container.prepend(addNoteSection);
 
@@ -194,7 +208,7 @@ const addNewNotePrimaryBtn = (): void => {
 
 const editNote = (id: string) => {
   const note = getNoteById(id);
-  note.classList.remove("note-edit-mode");
+  note.classList.remove(SELECTOR.class.noteEditMode);
 
   saveNoteElement(id);
   addEditNoteListener(id);
@@ -204,7 +218,7 @@ const editNote = (id: string) => {
 const cancelEditNote = (details: NoteDetails): void => {
   const { id } = details;
   const note = getNoteById(id);
-  note.classList.remove("note-edit-mode");
+  note.classList.remove(SELECTOR.class.noteEditMode);
 
   retrieveNoteElement(details);
   addEditNoteListener(id);
@@ -212,35 +226,28 @@ const cancelEditNote = (details: NoteDetails): void => {
 };
 
 const removeNoteConfirm = (id: string): void => {
-  const modal = document.getElementById("modal") as HTMLDialogElement;
   getNoteById(id)?.remove();
-  modal.close();
+  closeModal();
 
   const notes = getNotes().length;
 
   if (!notes) {
-    const container = document.getElementById("container")!;
+    const container = getMainContainer()!;
     const noNotesView = createNoNotesViewElement();
     container.replaceChildren(noNotesView);
-    changeSearchState("disable");
+    changeSearchState(SEARCH_STATE.disable);
 
     addNoNotesAddNoteListener();
     return;
   }
-  const searchPhrase = (
-    document.getElementById("search-notes") as HTMLInputElement
-  ).value;
-  filterResults(searchPhrase);
+  triggerFilter();
 };
 
-const removeNoteCancel = (): void => {
-  const modal = document.getElementById("modal") as HTMLDialogElement;
-  modal.close();
-};
-
-const changeSearchState = (state: "enable" | "disable"): void => {
-  const search = document.getElementById("search-notes") as HTMLInputElement;
-  if (state === "enable") {
+const changeSearchState = (state: SearchState): void => {
+  const search = document.getElementById(
+    SELECTOR.id.searchNotes
+  ) as HTMLInputElement;
+  if (state === SEARCH_STATE.enable) {
     search.removeAttribute("disabled");
   } else {
     search.value = "";
@@ -248,39 +255,54 @@ const changeSearchState = (state: "enable" | "disable"): void => {
   }
 };
 
-const filterResults = (val: string): void => {
-  const notes = getNotes() as HTMLElement[];
-  if (!val) {
-    notes.forEach((note) => {
-      note.classList.remove("hide");
-    });
-  }
-  const resultsIds = notes
-    .filter((note) => {
-      const id = note.getAttribute("data-id")!;
-      const details = getNoteDetails(id);
-      return details.body.includes(val) || details.title.includes(val);
-    })
-    .map((el) => el.getAttribute("data-id"));
+const triggerFilter = (): void => {
+  const searchPhrase = (
+    document.getElementById(SELECTOR.id.searchNotes) as HTMLInputElement
+  ).value;
+  filterResults(searchPhrase);
+};
 
-  const noResultElement = document.getElementById("no-results");
+const filterResults = (val: string): void => {
+  const notes = getNotes();
+  if (!val) {
+    showNotes(notes);
+    removeResultElement();
+    return;
+  }
+
+  const valLowercased = val.toLowerCase();
+  const resultsIds = getNotesIds(notes, valLowercased);
+
+  const noResultElement = document.getElementById(SELECTOR.id.noResults);
 
   if (!resultsIds.length && !noResultElement) {
     const noResultsView = createNoResultsViewElement();
     const container = getMainContainer();
     container.appendChild(noResultsView);
-  }
-
-  if (noResultElement && resultsIds.length) {
+  } else if (noResultElement && resultsIds.length) {
     noResultElement.remove();
   }
 
   notes.forEach((note) => {
     if (!resultsIds.includes(note.getAttribute("data-id"))) {
-      note.classList.add("hide");
+      note.classList.add(SELECTOR.class.hide);
     } else {
-      note.classList.remove("hide");
+      note.classList.remove(SELECTOR.class.hide);
     }
+  });
+};
+
+const removeResultElement = (): void => {
+  const noResultElement = document.getElementById(SELECTOR.id.noResults);
+
+  if (noResultElement) {
+    noResultElement.remove();
+  }
+};
+
+const showNotes = (notes: HTMLElement[]): void => {
+  notes.forEach((note) => {
+    note.classList.remove(SELECTOR.class.hide);
   });
 };
 

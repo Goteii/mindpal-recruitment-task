@@ -262,6 +262,7 @@ const createTextElementareaElement = (
   textarea.value = payload.value || "";
   return textarea;
 };
+
 const createButtonElement = (payload: Button): HTMLButtonElement => {
   const button = document.createElement("button");
   button.className = payload.className;
@@ -278,6 +279,7 @@ const createHeadingElement = (payload: Heading): HTMLElement => {
   heading.id = payload.id || "";
   return heading;
 };
+
 const createImageElement = (payload: CustomImage): HTMLImageElement => {
   const image = document.createElement("img");
   image.src = payload.src;
@@ -285,6 +287,7 @@ const createImageElement = (payload: CustomImage): HTMLImageElement => {
   image.alt = payload.alt;
   return image;
 };
+
 const createTextElement = (
   payload: CustomText
 ): HTMLSpanElement | HTMLParagraphElement => {
@@ -294,6 +297,7 @@ const createTextElement = (
   text.id = payload.id || "";
   return text;
 };
+
 //group creators
 const createNoteTileHeaderElement = (
   title: string,
@@ -341,6 +345,7 @@ const createNoteTileHeaderElement = (
 
   return noteHeader;
 };
+
 const createNoteTileBodyElement = (body: string, idx: string): HTMLElement => {
   const noteBody = createDivElement("note-body");
   const noteBodyText = createTextElement({
@@ -353,6 +358,7 @@ const createNoteTileBodyElement = (body: string, idx: string): HTMLElement => {
 
   return noteBody;
 };
+
 const createNoteTileFooterElement = (): HTMLElement => {
   const noteFooter = createDivElement("note-footer");
   const noteFooterText = createTextElement({
